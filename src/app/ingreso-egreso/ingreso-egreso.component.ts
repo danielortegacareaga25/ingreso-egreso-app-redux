@@ -1,12 +1,12 @@
 import { Subscription } from 'rxjs';
 import { isLoading, stopLoading } from './../shared/ui.actions';
-import { AppState } from './../app.reducer';
 import { IngresoEgresoService } from './../services/ingreso-egreso.service';
 import { IngresoEgreso } from './../models/ingreso-egreso-model';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
 import { Store } from '@ngrx/store';
+import { AppStateWithIngreso } from './ingreso-egreso.reducer';
 
 @Component({
   selector: 'app-ingreso-egreso',
@@ -21,7 +21,7 @@ export class IngresoEgresoComponent implements OnInit, OnDestroy {
   constructor(
     private fb: FormBuilder,
     private ingresoEgresoService: IngresoEgresoService,
-    private store: Store<AppState>
+    private store: Store<AppStateWithIngreso>
   ) {
     this.subs = new Subscription();
   }

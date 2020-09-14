@@ -11,7 +11,6 @@ export class IngresoEgresoService {
   constructor(private firestore: AngularFirestore, private auth: AuthService) {}
 
   crearIngresoEgreso(ingresoEgreso: IngresoEgreso) {
-    console.log({ ...ingresoEgreso });
     delete ingresoEgreso.uid;
     return this.firestore
       .doc(`/${this.auth.user.uid}/ingresos-egresos`)

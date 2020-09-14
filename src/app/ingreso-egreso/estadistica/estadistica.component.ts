@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { MultiDataSet, Label } from 'ng2-charts';
 import { Store } from '@ngrx/store';
-import { AppState } from './../../app.reducer';
 import { IngresoEgreso } from './../../models/ingreso-egreso-model';
 import { filter } from 'rxjs/operators';
+import { AppStateWithIngreso } from '../ingreso-egreso.reducer';
 
 @Component({
   selector: 'app-estadistica',
@@ -19,14 +19,13 @@ export class EstadisticaComponent implements OnInit {
   public doughnutChartLabels: Label[] = ['Ingresos', 'Egresos'];
   public doughnutChartData: MultiDataSet = [[]];
 
-  constructor(private store: Store<AppState>) {}
+  constructor(private store: Store<AppStateWithIngreso>) {}
 
   ngOnInit(): void {
     this.store
       .select('item')
       .pipe(filter(({ items }) => items.length > 0))
       .subscribe(({ items }) => {
-        console.log(items);
         this.generarEstadistica(items);
       });
   }
